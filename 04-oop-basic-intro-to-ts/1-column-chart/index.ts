@@ -19,6 +19,7 @@ export default class ColumnChart {
   private formatHeading?: (value: number) => string;
 
   public element: HTMLElement;
+  private bodyElement: Element | null = null;
 
   constructor({
     data = [],
@@ -34,55 +35,31 @@ export default class ColumnChart {
     this.formatHeading = formatHeading;
 
     this.element = this.render();
-    if (!data.length) {
-      this.element.classList.add("column-chart_loading");
-    }
+
+    this.updateLoadingState(data);
   }
 
   public update(data: number[]) {
     this.data = data;
-    const body = this.element.querySelector('[data-element="body"]');
+    this.updateLoadingState(data);
 
-    const maxValue = Math.max(...data);
-    const scale = this.chartHeight / maxValue;
-
-    const columns = data
-      .map((item) => {
-        const value = Math.floor(item * scale);
-        const percent = ((item / maxValue) * 100).toFixed(0) + "%";
-        return `<div style="--value: ${value}" data-tooltip="${percent}"></div>`;
-      })
-      .join("");
-
-    if (body) {
-      body.innerHTML = columns;
+    if (this.bodyElement) {
+      this.bodyElement.innerHTML = this.getColumnBody(data);
     }
   }
 
   private render(): HTMLElement {
-    const maxValue = Math.max(...this.data);
+    const columns = this.getColumnBody(this.data);
 
-    const scale = this.chartHeight / maxValue;
-
-    const columns = this.data
-      .map((item) => {
-        const value = Math.floor(item * scale);
-        const percent = ((item / maxValue) * 100).toFixed(0) + "%";
-        return `<div style="--value: ${value}" data-tooltip="${percent}"></div>`;
-      })
-      .join("");
-
-    //!функция для форматирования значения value (например, добавление знака валюты $).
     const heading = this.formatHeading
       ? this.formatHeading(this.value)
       : String(this.value);
 
-    //!ссылка «View all» (если передана).
     const link = this.link
       ? `<a href="${this.link}" class="column-chart__link">View all</a>`
       : "";
 
-    return createElement(`
+    const element = createElement(`
     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
       <div class="column-chart__title">
         ${this.label}
@@ -94,6 +71,36 @@ export default class ColumnChart {
       </div>
     </div>
   `);
+
+    this.bodyElement = element.querySelector('[data-element="body"]');
+
+    return element;
+  }
+
+  private getColumnBody(data: number[]): string {
+    const maxValue = Math.max(...data);
+
+    if (!data.length || maxValue === 0) {
+      return "";
+    }
+
+    const scale = this.chartHeight / maxValue;
+
+    return data
+      .map((item) => {
+        const value = Math.floor(item * scale);
+        const percent = ((item / maxValue) * 100).toFixed(0) + "%";
+        return `<div style="--value: ${value}" data-tooltip="${percent}"></div>`;
+      })
+      .join("");
+  }
+
+  private updateLoadingState(data: number[]) {
+    if (!data.length) {
+      this.element.classList.add("column-chart_loading");
+    } else {
+      this.element.classList.remove("column-chart_loading");
+    }
   }
 
   public remove() {
