@@ -68,8 +68,6 @@ export default class NotificationMessage {
       </div>
     `);
 
-    this.element = element;
-
-    return this.element;
+    return element;
   }
 }
