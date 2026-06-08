@@ -34,9 +34,13 @@
     "08-async-code-fetch-api/**/*.ts",
     "09-tests-for-frontend-apps/**/*.ts",
     "10-routes-browser-history-api/**/*.ts",
+    "11-spa-admin/**/*.ts"
   ],
   "exclude": [
     "**/__mocks__/**",
-    "node_modules"
+    "node_modules",
+    "09-tests-for-frontend-apps/playwright.config.ts",
+  "09-tests-for-frontend-apps/e2e/**"
   ]
+
 }

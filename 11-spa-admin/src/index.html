@@ -1,14 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <head>
   <meta charset="utf-8" />
-  <title>Админка для магазина</title>
-  <link
-    rel="apple-touch-icon-precomposed"
-    href="./assets/favicon/apple-touch-icon-precomposed.png"
-  />
-  <link rel="icon" href="./assets/favicon/favicon.png" />
-  <link rel="stylesheet" href="./styles/all.css" />
-  <link rel="stylesheet" href="style.css" />
+  <title>Shop Admin</title>
+  <!-- <link rel="stylesheet" href="../../../10-routes-browser-history-api/1-dashboard-page/styles/all.css" /> -->
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
@@ -22,30 +17,31 @@
       </h2>
       <ul class="sidebar__nav">
         <li>
-          <a href="/" data-page="dashboard">
+          <a href="/" data-nav-link>
             <i class="icon-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="/products" data-page="products">
+          <a href="/products" data-nav-link>
             <i class="icon-products"></i> <span>Products</span>
           </a>
         </li>
         <li>
-          <a href="/categories" data-page="categories">
+          <a href="/categories" data-nav-link>
             <i class="icon-categories"></i> <span>Categories</span>
           </a>
         </li>
         <li>
-          <a href="/sales" data-page="sales">
+          <a href="/sales" data-nav-link>
             <i class="icon-sales"></i> <span>Sales</span>
           </a>
         </li>
       </ul>
+
       <ul class="sidebar__nav sidebar__nav_bottom">
         <li>
           <button type="button" class="sidebar__toggler">
-            <i class="icon-toggle-sidebar"></i> <span>Toggle sidebar</span>
+            <i class="icon-toggle-sidebar"></i> <span>Скрыть панель</span>
           </button>
         </li>
       </ul>
@@ -53,19 +49,5 @@
     <section class="content" id="content"></section>
   </main>
 
-  <script type="module">
-    import Page from "./index.ts";
-
-    const contentNode = document.querySelector("#content");
-
-    async function initialize() {
-      const page = new Page();
-      const element = await page.render();
-
-      contentNode.innerHTML = "";
-      contentNode.append(element);
-    }
-
-    initialize();
-  </script>
+  <script type="module" src="./main.ts"></script>
 </body>

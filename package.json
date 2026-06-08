@@ -22,6 +22,8 @@
     "dev:09:1-product-form-v2": "node scripts/dev-task.js 09-tests-for-frontend-apps/1-product-form-v2",
     "dev:09:2-sortable-list": "node scripts/dev-task.js 09-tests-for-frontend-apps/2-sortable-list",
     "dev:10:1-dashboard-page": "node scripts/dev-task.js 10-routes-browser-history-api/1-dashboard-page",
+    "dev:11": "node scripts/dev-task.js 11-spa-admin",
+
     "test": "vitest run",
     "test:watch": "vitest",
     "test:specific": "vitest run -t"

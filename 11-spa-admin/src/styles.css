@@ -1,0 +1,216 @@
+@import url("../../10-routes-browser-history-api/1-dashboard-page/styles/all.css");
+@import url("../../10-routes-browser-history-api/1-dashboard-page/style.css");
+@import url("../../06-events-practice/3-double-slider/style.css");
+
+@import url("../../09-tests-for-frontend-apps/2-sortable-list/style.css");
+/* @import url("../../09-tests-for-frontend-apps/1-product-form-v2/style.css"); */
+/*
+styles.css
+  ├── all.css
+  │     └── common.css
+  │           ├── fontello.css  ← иконки (icon-dashboard, icon-products...)
+  │           ├── variables.css ← CSS-переменные (--blue, --white...)
+  │           └── form.css      ← стили форм (понадобится для product edit)
+  │     └── column-chart/style.css
+  │     └── sortable-table/style.css
+  │     └── range-picker/style.css
+  └── style.css ← лейаут (sidebar, .main, .content)*/
+
+.products-list form.form-inline .form-label {
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+.products-list form.form-inline .form-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+form .form-label {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--table-grey);
+}
+
+form select.form-control {
+  height: 38px;
+}
+form .form-control {
+  background-color: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--dark-blue);
+  outline: none;
+}
+.products-list form.form-inline {
+  grid-template-columns: 3fr 3fr 2fr;
+  grid-gap: 46px;
+}
+form.form-inline {
+  display: grid;
+  grid: auto-flow / repeat(auto-fit, minmax(50px, 1fr));
+  grid-gap: 16px;
+}
+
+.products-list button.fit-content {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+/* И добавить CSS для аккордеона (.category, .category__header, .category__body, скрытие/показ через .category_open).   */
+
+.category.category_add-first {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--grey-extra-light);
+  border: 1px solid var(--grey-light);
+  box-shadow: none;
+}
+
+.category.category_add-first p {
+  color: var(--grey);
+  margin: 0 0 12px;
+}
+
+.category.category_add-first .category__body,
+.category.category_add-first .category__header {
+  flex: 1 0 auto;
+}
+
+.category__header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 16px 40px;
+  position: relative;
+  cursor: pointer;
+}
+
+.category__header::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-left: 6px solid var(--grey);
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  margin-top: -6px;
+  transition: 0.3s all ease;
+}
+
+.category.category_open .category__header::before {
+  left: 16px;
+  margin-top: -3px;
+  transform: rotate(90deg);
+}
+
+.category__header .link {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--blue);
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  transition: 0.2s all;
+}
+
+.category__header .link:hover {
+  text-decoration: underline;
+}
+
+.category__body {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.05s ease-out;
+}
+
+.category.category_open {
+  background: var(--grey-extra-light);
+  border: 1px solid var(--grey-light);
+  box-shadow: none;
+}
+
+.category.category_open .category__body {
+  height: auto;
+}
+
+.subcategory-list {
+  padding: 0 16px 24px 40px;
+}
+
+.categories.categories_empty {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.category.category_open {
+  background: var(--grey-extra-light);
+  border: 1px solid var(--grey-light);
+  box-shadow: none;
+}
+.category.category_open {
+  background: var(--grey-extra-light);
+  border: 1px solid var(--grey-light);
+  box-shadow: none;
+}
+
+.category.category_open .category__body {
+  height: auto;
+}
+
+.subcategory-list {
+  padding: 0 16px 24px 40px;
+}
+
+.categories.categories_empty {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.categories form input {
+  margin-right: 12px;
+}
+
+.categories__sortable-list {
+  margin: 0;
+}
+
+.categories__sortable-list-item {
+  margin: 12px 0;
+  padding: 12px 16px;
+  min-height: 48px;
+}
+
+.categories__sortable-list-item > strong {
+  color: var(--dark-blue);
+}
+
+.categories__sortable-list-item > span {
+  color: var(--grey);
+}
+
+.sales .sortable-table__row {
+  grid: auto-flow / 10% 33% 33% 12% 12%;
+}
+.category {
+  background: var(--white);
+  border: 1px solid var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
